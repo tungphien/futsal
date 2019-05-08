@@ -10,15 +10,15 @@
 
 # IDEs and editors
 /BE/.idea
-.project
-.classpath
-.c9/
+/BE/.project
+/BE/.classpath
+/BE/.c9/
 *.launch
 .settings/
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode/*
+/BE/.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
