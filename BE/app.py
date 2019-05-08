@@ -1,11 +1,11 @@
 import json
-from bson.json_util import dumps, loads
+
 from flask import Flask, request, redirect, url_for
+
 from services.data_services import DataServices
 
 # connection
 dataServices = DataServices()
-employees = dataServices.employees()
 
 # init app
 app = Flask(__name__)
@@ -13,20 +13,14 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-  x = employees.find()
-  x_dump = dumps(x)
-  x_load= loads(x_dump)
-  print x_load[0]['name']
-  return x_dump
+  return dataServices.findAll('employees')
 
 
 @app.route("/find")
 def find():
   name = request.args.get('name')
   print name
-  x = employees.find({"name": name})
-
-  return dumps(x)
+  return dataServices.findBy('employees', {"name": name})
 
 
 @app.route("/add", methods=['POST', 'GET', 'OPTIONS'])
@@ -38,9 +32,7 @@ def add():
     params_dicts = request.form
   print params_dicts.get('name')
   if params_dicts:
-    name = params_dicts.get('name')
-    address = params_dicts.get('address')
-    employees.insert_one({"name": name, "address": address})
+    dataServices.add('employees', {"name": params_dicts.get('name'), "address": params_dicts.get('address')})
   return redirect(url_for('home'))
 
 
@@ -53,13 +45,17 @@ def update():
     params_dicts = request.form
   print params_dicts
   if params_dicts:
-    name = params_dicts.get('name')
-    address = params_dicts.get('address')
+    myquery = {"name": params_dicts.get('name')}
+    newvalues = {"$set": {"address": params_dicts.get('address')}}
+    dataServices.update('employees', myquery, newvalues)
+  return redirect(url_for('home'))
 
-  myquery = {"name": name}
-  newvalues = {"$set": {"address": address}}
 
-  employees.update_many(myquery, newvalues)
+@app.route("/delete", methods=['POST', 'GET', 'OPTIONS'])
+def delete():
+  name = request.args.get('name')
+  print name
+  dataServices.delete('employees', {'name': name})
   return redirect(url_for('home'))
 
 
