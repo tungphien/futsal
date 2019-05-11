@@ -7,15 +7,16 @@ import { DataService } from '../data.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  stadiums: Object;
+  stadiums: object;
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    // this.dataService.addStadium(null);
     this.dataService.getStadiums().subscribe(data => {
       this.stadiums = data
       console.log(this.stadiums);
     }
-  );
+    );
   }
 
 }

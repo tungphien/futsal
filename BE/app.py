@@ -38,7 +38,6 @@ def add():
     print params_dicts
     # if params_dicts:
     dataServices.add('stadium', params_dicts)
-    return redirect(url_for('home'))
 
 
 @app.route("/update", methods=['POST', 'GET', 'OPTIONS'])
