@@ -1,12 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule,Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
+import { StadiumComponent } from './stadium/stadium.component';
+
 
 const appRoutes: Routes = [
   {
@@ -16,6 +19,10 @@ const appRoutes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'stadium',
+    component: StadiumComponent
   },
   {
     path: 'contact',
@@ -29,9 +36,11 @@ const appRoutes: Routes = [
     NavComponent,
     AboutComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    StadiumComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],

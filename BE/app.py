@@ -2,6 +2,7 @@ import json
 
 from bson import ObjectId
 from flask import Flask, request, redirect, url_for
+from flask_cors import cross_origin
 
 from services.data_services import DataServices
 
@@ -11,14 +12,15 @@ dataServices = DataServices()
 # init app
 app = Flask(__name__)
 
-
 @app.route("/")
+@cross_origin()
 def home():
     dataServices.findAll('team')
     return dataServices.findAll('stadium')
 
 
 @app.route("/find")
+@cross_origin()
 def find():
     name = request.args.get('name')
     print name
@@ -26,6 +28,7 @@ def find():
 
 
 @app.route("/add", methods=['POST', 'GET', 'OPTIONS'])
+@cross_origin()
 def add():
     params_dicts = {}
     if request.data:
@@ -39,6 +42,7 @@ def add():
 
 
 @app.route("/update", methods=['POST', 'GET', 'OPTIONS'])
+@cross_origin()
 def update():
     params_dicts = {}
     if request.data:
@@ -55,6 +59,7 @@ def update():
 
 
 @app.route("/delete", methods=['POST', 'GET', 'OPTIONS'])
+@cross_origin()
 def delete():
     id = request.args.get('id')
     dataServices.delete('stadium', {'_id': ObjectId(id)})

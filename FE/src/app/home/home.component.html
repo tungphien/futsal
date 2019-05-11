@@ -1,3 +1,7 @@
-<p>
-  home works!
-</p>
+<h1>Danh sách sân bóng</h1>
+
+<ul *ngIf="stadiums">
+  <li *ngFor="let stadium of stadiums">
+    <p>{{ stadium.stadiumName }} - {{ stadium.stadiumOwner }}</p>
+  </li>
+</ul>
