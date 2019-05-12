@@ -12,6 +12,7 @@ export class StadiumadminlistComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    console.log('StadiumadminlistComponent')
     this.dataService.getStadiums().subscribe(data => {
       this.stadiums = data
     }

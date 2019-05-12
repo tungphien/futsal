@@ -42,7 +42,8 @@ def add():
         params_dicts['createDate'] = datetime.datetime.now()
         params_dicts['updateDate'] = datetime.datetime.now()
         dataServices.add('stadium', params_dicts)
-    return json.dumps({'msg':'Successful', 'data':params_dicts})
+        # return json.dumps({'msg': 'Successful', 'data': json.dumps(params_dicts)})
+    return json.dumps({'msg':'Successful'})
 
 @app.route("/update", methods=['POST', 'GET', 'OPTIONS'])
 @cross_origin()
