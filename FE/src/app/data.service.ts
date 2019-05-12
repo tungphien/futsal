@@ -18,14 +18,18 @@ export class DataService {
   getStadiums() {
     return this.http.get(this.BASE_URL)
   }
-  addStadium(data: {}) {
-    data = {
-      "stadiumName": 'Sân '+ Date.now(),
-      "stadiumOwner": 'Chủ sân ' + Date.now(),
-      "price": 200
-    }
+  addStadium(data: {}) {   
     console.log(data)
     this.http.post(this.BASE_URL + 'add', data, this.httpOptions).subscribe(res => {
+      console.log(res);
+    },
+    err => {
+      console.log("Error occured");
+    })
+  }
+
+  deleteStadium(data:object){
+    this.http.post(this.BASE_URL + 'delete', data, this.httpOptions).subscribe(res => {
       console.log(res);
     },
     err => {

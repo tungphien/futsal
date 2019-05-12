@@ -1,0 +1,25 @@
+<section>
+    <button type="button" class="btn btn-primary" routerLink="/admin/stadium/add">Thêm mới sân</button>
+    <h1>Danh sách sân bóng</h1>
+  
+      <table class="table" *ngIf="stadiums">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tên sân</th>
+            <th scope="col">Tên chủ sân</th>
+            <th scope="col">Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stadium of stadiums">
+            <th scope="row">1</th>
+            <td>{{ stadium.stadiumName }}</td>
+            <td>{{ stadium.stadiumOwner }}</td>
+            <td class="actions_handle"><a>Sửa</a> | <a (click)="deleteStadium(stadium._id.$oid)">Xóa</a></td>
+          </tr>
+         
+        </tbody>
+      </table>
+    
+  </section>

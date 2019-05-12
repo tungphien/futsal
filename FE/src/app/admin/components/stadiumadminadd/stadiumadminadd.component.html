@@ -1,0 +1,36 @@
+<section>
+  <h1>Thêm mới sân bóng</h1>
+
+  <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+
+    <h5 *ngIf="success">Lưu thành công!</h5>
+
+    <label>
+      Tên sân:
+      <input type="text" formControlName="stadiumName">
+      <div *ngIf="submitted && messageForm.controls.stadiumName.errors" class="error">
+        <div *ngIf="messageForm.controls.stadiumName.errors.required">Bạn phải nhập tên sân</div>
+      </div>
+    </label>
+
+    <label>
+      Chủ sân:
+      <input type="text" formControlName="stadiumOwner">
+      <div *ngIf="submitted && messageForm.controls.stadiumOwner.errors" class="error">
+        <div *ngIf="messageForm.controls.stadiumOwner.errors.required">Bạn phải nhập tên người chủ sân</div>
+      </div>
+    </label>
+
+    <input type="submit" value="Lưu thông tin" class="btn btn-primary">
+    <button type="button" class="btn btn-basic" routerLink="/admin/stadium">Quay lại</button>
+
+  </form>
+  <!-- 
+<div *ngIf="submitted" class="results">
+  <strong>Name:</strong>
+  <span>{{ messageForm.controls.stadiumName.value }}</span>
+
+  <strong>Message:</strong>
+  <span>{{ messageForm.controls.stadiumOwner.value }}</span>
+</div> -->
+</section>
