@@ -12,11 +12,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let stadium of stadiums">
+          <tr *ngFor="let stadium of stadiums; let i = index">
             <th scope="row">1</th>
             <td>{{ stadium.stadiumName }}</td>
             <td>{{ stadium.stadiumOwner }}</td>
-            <td class="actions_handle"><a>Sửa</a> | <a (click)="deleteStadium(stadium._id.$oid)">Xóa</a></td>
+            <td class="actions_handle"><a>Sửa</a> | <a (click)="deleteStadium(stadium,i)">Xóa</a></td>
           </tr>
          
         </tbody>

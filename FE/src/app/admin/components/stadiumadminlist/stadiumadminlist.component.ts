@@ -8,7 +8,7 @@ import { DataService } from 'src/app/data.service';
 })
 export class StadiumadminlistComponent implements OnInit {
 
-  stadiums: object;
+  stadiums: any = [];
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
@@ -18,7 +18,9 @@ export class StadiumadminlistComponent implements OnInit {
     );
   }
 
-  deleteStadium(id:string){
-    this.dataService.deleteStadium({'id':id})
+  deleteStadium(stadium: object, index: any) {   
+    console.log(stadium)
+    this.dataService.deleteStadium({'id':stadium['_id']['$oid']})
+    this.stadiums.splice(index, 1)
   }
 }

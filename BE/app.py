@@ -1,4 +1,6 @@
+import datetime
 import json
+from xmlrpclib import DateTime
 
 from bson import ObjectId
 from flask import Flask, request, redirect, url_for
@@ -36,9 +38,11 @@ def add():
     else:
         params_dicts = request.form
     print params_dicts
-    # if params_dicts:
-    dataServices.add('stadium', params_dicts)
-
+    if params_dicts:
+        params_dicts['createDate'] = datetime.datetime.now()
+        params_dicts['updateDate'] = datetime.datetime.now()
+        dataServices.add('stadium', params_dicts)
+    return json.dumps({'msg':'Successful', 'data':params_dicts})
 
 @app.route("/update", methods=['POST', 'GET', 'OPTIONS'])
 @cross_origin()
@@ -50,6 +54,7 @@ def update():
         params_dicts = request.form
     print params_dicts
     if params_dicts:
+        params_dicts['updateDate'] = datetime.datetime.now()
         id = params_dicts.get('id')
         myquery = {'_id': ObjectId(id)}
         newvalues = {"$set": params_dicts}
@@ -60,10 +65,14 @@ def update():
 @app.route("/delete", methods=['POST', 'GET', 'OPTIONS'])
 @cross_origin()
 def delete():
-    id = request.args.get('id')
+    params_dicts = {}
+    if request.data:
+        params_dicts = json.loads(request.data)
+    else:
+        params_dicts = request.form
+    id = params_dicts.get('id')
     dataServices.delete('stadium', {'_id': ObjectId(id)})
-    return redirect(url_for('home'))
-
+    return json.dumps({'msg':'Successful', 'id':id})
 
 if __name__ == "__main__":
     app.run(debug=True)
